@@ -11,9 +11,8 @@ sys.setdefaultencoding('utf-8')
 class ZhihuSpider(Spider):
 	name = 'Zhihu'
 	#allowed_domains = 'zhihu.com'
-	def __init__(self):
-		self.user = 'cogito'
-		self.start_urls = ['http://www.zhihu.com/people/' + self.user + '/answers']
+	def __init__(self, username = None):
+		self.start_urls = ['http://www.zhihu.com/people/' + str(username) + '/answers']
 
 	def parse(self, response):  
 		item = question_link()
