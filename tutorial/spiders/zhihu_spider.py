@@ -22,23 +22,13 @@ class ZhihuSpider(Spider):
 		for link in sel.xpath('//a[@class="question_link"]/@href').extract():
 			print link
 			yield Request(url = 'http://www.zhihu.com' + link, callback = self.parse_answer)
-			#haha = Request(url = 'http://www.zhihu.com' + link, callback = self.parse_answer)
-			# body = urllib2.urlopen(url = 'http://www.zhihu.com' + link).read()
-			# response = HtmlResponse(url = 'http://www.zhihu.com' + link, body = body)
-			# self.parse_answer(response)
-		# # for site in sites:
-		# # 	item = question_link()
-		# # 	item.link = site.xpath('a/@href').extract()
-		# # 	items.append(item)
-		# filename = response.url.split("/")[-2]  
-		# with open(filename, 'wb') as f:
-		# 	f.write(items)
+
 	
 	def parse_answer(self, response):
 		ans_item = answer()
 		response_selector = Selector(response)
-		ans_item['answer'] = response_selector.xpath('//div[@class = " zm-editable-content clearfix"][1]').extract()
-		ans_item['question'] = response_selector.xpath('//title[1]').extract()
+		ans_item['question'] = response_selector.xpath('//title[1]/text()').extract()
+		ans_item['answer'] = response_selector.xpath('//div[@class = " zm-editable-content clearfix"][1]/text()').extract()
 		yield ans_item
 
 
