@@ -32,7 +32,8 @@ class ZhihuSpider(Spider):
 		response_selector = Selector(response)
 		ans_item['question'] = response_selector.xpath('//title[1]/node()').extract()
 		ans_item['answer'] = ''.join(response_selector.xpath('//div[@class = " zm-editable-content clearfix"][1]/node()').extract())
-		ans_item['upvote'] = response.xpath('//div[@class="zm-item-vote-info "]/@data-votecount')[0].extract()
+		ans_item['upvote'] = response_selector.xpath('//div[@class="zm-item-vote-info "]/@data-votecount')[0].extract()
+		ans_item['image_urls'] = response.xpath('//div[@class = " zm-editable-content clearfix"][1]/noscript/img/@src').extract()
 		yield ans_item
 
 

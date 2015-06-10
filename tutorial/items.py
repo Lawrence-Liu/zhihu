@@ -20,5 +20,7 @@ class answer(scrapy.Item):
 	question = scrapy.Field()
 	answer = scrapy.Field()
 	upvote = scrapy.Field()
+	image_urls = scrapy.Field()
+	images = scrapy.Field()
 	#downvote = scrapy.Field()
 
