@@ -9,10 +9,18 @@
 #
 
 BOT_NAME = 'tutorial'
+MONGODB_HOST = 'localhost'
+MONGODB_PORT = 27017
+MONGODB_DATABASE = 'zhihu'
+MONGODB_COLLECTION = 'answer'
 
 SPIDER_MODULES = ['tutorial.spiders']
 NEWSPIDER_MODULE = 'tutorial.spiders'
-ITEM_PIPELINES = {'tutorial.pipelines.TutorialPipeline' : 100}
+ITEM_PIPELINES = {
+    'scrapy_mongodb.MongoDBPipeline' : 100,
+}
+
+#ITEM_PIPELINES = {'tutorial.pipelines.TutorialPipeline' : 100}
 # Crawl responsibly by identifying yourself (and your website) on 
 # the user-agent
 # USER_AGENT = 'tutorial (+http://www.yourdomain.com)'

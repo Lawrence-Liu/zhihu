@@ -14,3 +14,10 @@ class TutorialPipeline(object):
 	def process_item(self, item, spider):
 		line = json.dumps(dict(item), encoding = 'utf-8', ensure_ascii=False) + "\n" 
 		self.file.write(line)
+
+
+# class TopicPipeline(object):
+# 	def __init__(self):
+# 		self.file = open('topic.jl', 'wb')
+
+# 	def
