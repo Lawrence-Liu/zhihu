@@ -14,6 +14,7 @@ class ZhihuSpider(Spider):
 	#allowed_domains = 'zhihu.com'
 	def __init__(self, username = None):
 		self.start_urls = ['http://www.zhihu.com/people/' + str(username) + '/answers']
+		self.username = username
 
 	def parse(self, response):  
 		item = question_link()
@@ -30,9 +31,10 @@ class ZhihuSpider(Spider):
 	def parse_answer(self, response):
 		ans_item = answer()
 		response_selector = Selector(response)
+		ans_item['username'] = self.username
 		ans_item['question'] = response_selector.xpath('//title[1]/node()').extract()
 		ans_item['answer'] = ''.join(response_selector.xpath('//div[@class = " zm-editable-content clearfix"][1]/node()').extract())
-		ans_item['upvote'] = response.xpath('//div[@class="zm-item-vote-info "]/@data-votecount')[0].extract()
+		ans_item['upvote'] = int(response.xpath('//div[@class="zm-item-vote-info "]/@data-votecount')[0].extract())
 		yield ans_item
 
 

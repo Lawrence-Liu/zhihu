@@ -9,8 +9,7 @@
 #
 
 BOT_NAME = 'tutorial'
-MONGODB_HOST = 'localhost'
-MONGODB_PORT = 27017
+MONGODB_URI = 'mongodb://localhost:27017'
 MONGODB_DATABASE = 'zhihu'
 MONGODB_COLLECTION = 'answer'
 
